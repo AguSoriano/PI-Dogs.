@@ -1,0 +1,68 @@
+(1°) me conecto a postgres desde la terminal
+sudo -u postgres psql
+
+(2°) CREO LA BASE DE DATOS:
+
+CREATE DATABASE nombre_db;
+
+(3°) HAGO LA CONECCION CON SEQUELIZE:
+
+CREO EL ARCHIVO .env sobre mi carpeta raiz "api"
+
+y en...
+
+//db.js
+
+const {
+  DB_USER, DB_PASSWORD, DB_HOST, // ESTAS SON LAS VARIABLES DE ENTORNO EN ".env"
+} = process.env;
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/breakingbad`, {
+  logging: false, // set to console.log to see the raw SQL queries
+  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+});
+
+(4°) CREO LOS MODELOS en la carpeta models
+
+const { DataTypes } = require('sequelize');
+// Exportamos una funcion que define el modelo
+// Luego le injectamos la conexion a sequelize.
+module.exports = (sequelize) => {
+  // defino el modelo
+  sequelize.define('occupation', { //no le paso el id porque se genera por defecto
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
+  },
+  { 
+    timestamps: false, (este seteo sirve para que mis tablas se creen en singular)
+    freezeTableName: true,
+  });
+};
+
+(5°) para poder ver estas tablas en mi base de datos que creé:
+
+tengo que hacer en la terminal integrada sobre mi carpeta 'api' un:
+
+npm i  y  npm start
+
+luego de esto si voy a poder ver las tablas en la db
+
+(6°) CREO LAS RELACIONES en este caso de muchos a muchos.
+
+esto me va a generar una nueva tabla 'character_occuption'
+
+const { Character, Occupation } = sequelize.models;
+
+Character.belongsToMany(Occupation, {through: 'character_occuption'});
+Occupation.belongsToMany(Character, {through: 'character_occuption'});
+
+(7°) CREO LAS RUTAS en el archivo index de la carpeta routes
+
+PRIMERO tengo que crear mis funciones controladoras
+que me traen todo de la api , todo de la db y las dos concatenadas
+
+lo ideal es hacer un archivo por cada tipo de ruta
+
+instalamos axios: npm i axios    y lo importamos
