@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config(); //instalamos esta libreria para que lea nuestras variables de entorno
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');

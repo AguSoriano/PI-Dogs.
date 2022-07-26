@@ -20,9 +20,13 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 
+const PORT = process.env.PORT || 3001;
+//La ventaja de esto es que a la hora de hacer un deploy, necesitamos que
+//se nos pase este puerto
+
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => { //el force true lo que hace es que cada vez que corto la base de datos lo vuelve a generar de nuevo
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(PORT, () => { //iniciamos el servidor
+    console.log(`Servidor corriendo en el puerto ${PORT}`); // eslint-disable-line no-console
   });
 });

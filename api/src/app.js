@@ -6,7 +6,7 @@ const routes = require('./routes/index.js');
 
 require('./db.js');
 
-const server = express();
+const server = express(); //creamos una instancia de express llamada server
 
 server.name = 'API';
 
