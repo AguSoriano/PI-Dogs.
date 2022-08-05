@@ -9,15 +9,20 @@ const link = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
 const totalApi = async () => {
     const {data} = await axios.get(link)
     //console.log(data)
+    //let temperaments = data.map (i => i.temperament).join ().split (',');
     const info = await data.map(i => {
-        
+        let temperamentArray = [];
+        if (i.temperament) {//pregunto que exista el temperamento y lo devuelvo en un arreglo
+            temperamentArray = i.temperament.split(", ");
+        }
         return {
             id: i.id,
             name: i.name,
-            height: i.height,
-            weight: i.weight,
+            height: i.height.metric,
+            weight: i.weight.metric.includes('NaN')? i.weight.metric.replace('NaN', '0').split('-'): i.weight.metric.split('-'),
             years_of_life: i.life_span,
-            image: i.image
+            image: i.image,
+            temperament: temperamentArray
         }
     })
     //console.log(info)

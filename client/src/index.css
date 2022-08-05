@@ -1,4 +1,6 @@
 body {
+  color: white;
+  background-image: url('/home/agustin/Escritorio/HENRY/PI-Dogs-main/client/src/components/LandingPage/imagenes/1920x1200_px_animals_black_background_dog-727744.jpeg');
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

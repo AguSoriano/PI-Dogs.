@@ -1,0 +1,38 @@
+.Nav-Contenedor{
+    float: left;
+}
+.Landing-Page {
+ display: inline-block;
+ background: salmon;
+ color: #fff;
+ padding: 10px 30px;
+ text-decoration: none;
+ text-align: left;
+ align-content: left;
+}
+
+.Details {
+    display: inline-block;
+    background: salmon;
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.DogsCreate {
+    display: inline-block;
+    background: salmon;
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+}
+
+.Landing-Page:hover{
+    background: rosybrown;
+}
+.DogsCreate:hover{
+    background: rosybrown;
+}
+.Details:hover{
+    background: rosybrown;
+}

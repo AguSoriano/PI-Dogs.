@@ -1,0 +1,37 @@
+.Card-contenedor {
+    align-content: center;
+    background-color: white;
+    height: 300px;
+    width: 200px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Titulo.Containter{
+    flex-direction: column;
+    width: 200px;
+    display: flex;
+}
+.Titulo-Card {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 19px;
+    margin: 0;
+    padding-top: 10px;
+    color: black
+}
+
+.Info-Contenedor {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
+    color: rgb(92, 92, 92)
+}
+
+.Imagen {
+    height: 145px;
+    width: 180px;
+    border-radius: 4px;
+    margin: 9px;
+    padding-top: 3px;
+}
