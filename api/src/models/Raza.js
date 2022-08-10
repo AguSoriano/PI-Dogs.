@@ -17,18 +17,23 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     height:{
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     weight:{
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
     years_of_life:{
       type: DataTypes.STRING,
     },
     image:{
-      type: DataTypes.STRING,
+      type: DataTypes.JSON(DataTypes.STRING),
+    },
+    createdInBd: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
     }
     
   },

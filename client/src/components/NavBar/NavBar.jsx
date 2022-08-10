@@ -7,6 +7,7 @@ function NavBar() {
     <nav>
       <div className='Nav-Contenedor'>
         <li className='Landing-Page'><Link to='/'>LandingPage</Link></li>
+        <li className='home'><Link to='/dogs'>Home</Link></li>
         <li className='Details'><Link to='/dogs/:id'>Details</Link></li>
         <li className='DogsCreate'><Link to='/create/dogs'>DogsCreate</Link></li>
         </div>

@@ -1,9 +1,22 @@
 
-import { GET_DOGS, ORDER_BY_NAME, GET_TEMPERAMENTS, GET_FILTER_TEMPERAMENTS, GET_FILTER_RAZA } from "../actions/ActionsTypes";
+import {
+    GET_DOGS,
+    ORDER_BY_NAME,
+    ORDER_BY_WEIGHT,
+    GET_TEMPERAMENTS,
+    GET_FILTER_TEMPERAMENTS,
+    GET_FILTER_RAZA,
+    FILTER_CREATED,
+    GET_NAME_DOGS,
+    POST_DOGS,
+    GET_DETAILS
+} from "../actions/ActionsTypes";
+
 const initialState = {
     dogs: [],
     temperaments: [],
-    allDogs: []
+    allDogs: [],
+    details: []
 
 }
 
@@ -12,11 +25,25 @@ export default function reducer(state = initialState, { type, payload }) {
     switch (type) {
 
         case GET_DOGS:
+            /*payload.forEach(element => {
+                if (!element.temperament[0]) {
+                  element.temperament[0] = "no-temperaments" //eliminamos arreglos vacios de temperamentos
+                }
+              });*/
             return {
                 ...state,
                 dogs: payload,
 
             }
+        case ORDER_BY_WEIGHT:
+            const sortedWeight =
+                payload === "min_weight"
+                    ? state.dogs.sort((a, b) => parseInt(a.weight.slice(0, 3)) - parseInt(b.weight.slice(0, 3)))
+                    : state.dogs.sort((a, b) => parseInt(b.weight.slice(0, 3)) - parseInt(a.weight.slice(0, 3)))
+            return {
+                ...state,
+                dogs: sortedWeight,
+            };
 
         case ORDER_BY_NAME:
 
@@ -46,6 +73,8 @@ export default function reducer(state = initialState, { type, payload }) {
 
             };
 
+
+
         case GET_TEMPERAMENTS:
 
             const filteresTemp = payload.filter((temp) => temp.name !== "");
@@ -65,14 +94,17 @@ export default function reducer(state = initialState, { type, payload }) {
 
             let filteredDogs = [];
 
-            if(payload === 'Todos'){
+            if (payload === 'Todos') {
                 filteredDogs = state.allDogs;
-            }else{
+            } else {
                 for (let i = 0; i < state.dogs.length; i++) {
 
-                    if (state.dogs[i].temperament.find(t => t === payload)) {
+                    if (state.dogs[i].temperament?.find(t => t === payload)) {
+                        filteredDogs.push(state.dogs[i]);
+                    }else if(state.dogs[i].temperamentos?.find(t => t === payload)){
                         filteredDogs.push(state.dogs[i]);
                     }
+
                 }
             }
 
@@ -82,7 +114,7 @@ export default function reducer(state = initialState, { type, payload }) {
                 dogs: filteredDogs,
             };
 
-            case GET_FILTER_RAZA:
+        case GET_FILTER_RAZA:
 
 
             if (state.allDogs.length === 0) {
@@ -93,11 +125,11 @@ export default function reducer(state = initialState, { type, payload }) {
 
             let filteredDogsByRaza = [];
 
-            if(payload === 'Todos'){
+            if (payload === 'Todos') {
                 filteredDogsByRaza = state.allDogs;
-            }else{
+            } else {
                 for (let i = 0; i < state.dogs.length; i++) {
-                    if (state.dogs[i].name === payload) {               
+                    if (state.dogs[i].name === payload) {
                         filteredDogsByRaza.push(state.dogs[i]);
                     }
                 }
@@ -106,28 +138,34 @@ export default function reducer(state = initialState, { type, payload }) {
                 ...state,
                 dogs: filteredDogsByRaza,
             };
-        /*case "ordenar-liviano-pesado":
-            const ord_Liv_Pes =
-            payload === "Más pesado a más liviano"?
-            state.dogs.sort((a,b) => parseInt(a.weight.slice(0, 3)) - parseInt(b.weight.slice(0, 3))):
-            state.dogs.sort((a,b) => parseInt(b.weight.slice(0, 3)) - parseInt(a.weight.slice(0, 3)))
-           return {
-               ...state,
-               dogs: ord_Liv_Pes, 
-           };*/
-        case "ordenar-liviano-pesado":
+
+        case FILTER_CREATED:
+
+            const allDogs = state.allDogs
+            console.log(allDogs)
+            const createdFilter = payload === 'created' ? allDogs.filter(el => el.createdInBd) : allDogs.filter(el => !el.createdInBd)
             return {
                 ...state,
-                dogs: state.dogs.sort((a, b) => parseInt(a.weight.slice(0, 3)) - parseInt(b.weight.slice(0, 3)))
-            };
-        case "ordenar-pesado-liviano":
+                dogs: createdFilter
+            }
+
+
+        case GET_NAME_DOGS:
             return {
                 ...state,
-                dogs: state.dogs.sort((a, b) => parseInt(b.weight.slice(0, 3)) - parseInt(a.weight.slice(0, 3)))
-            };
+                dogs: payload
+            }
+
+        case POST_DOGS:
+            return {
+                ...state,
+            }
+        case GET_DETAILS:
+            return {
+                ...state,
+                details: payload
+            }
 
         default: return state
     }
 }
-
-

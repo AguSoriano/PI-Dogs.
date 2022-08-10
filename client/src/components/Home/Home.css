@@ -2,3 +2,49 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.container-todos-select {
+    display: flex;
+    height: 18px;
+    padding-top: 17px;
+}
+
+.select-container {
+    width: 380px;
+}
+
+.dogs-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 1100px;
+    justify-content: space-evenly;
+   
+    margin-left: 6%;
+}
+
+select {
+    width: 160px;
+    background: white;
+    border: 2px solid;
+    border-radius: 40px;
+    border-color: #6D8BE8;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+}
+
+.p-cargar{
+    width: 160px;
+    background: white;
+    border: 2px solid;
+    border-radius: 40px;
+    border-color: #6D8BE8;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px; 
+}
+
+option {
+    color: black
+}
