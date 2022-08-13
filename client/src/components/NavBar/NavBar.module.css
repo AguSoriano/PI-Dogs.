@@ -1,0 +1,48 @@
+.Nav_Contenedor {
+    float: left;
+}
+
+.Landing_Page {
+    display: inline-block;
+    background: rgb(3, 0, 0);
+    padding: 10px 30px;
+    text-decoration: none;
+    text-align: left;
+    align-content: left;
+    list-style: none;
+    color: #fff;
+}
+
+.DogsCreate {
+    display: inline-block;
+    background: rgb(3, 0, 0);
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    text-align: left;
+    align-content: left;
+}
+
+.home {
+
+    display: inline-block;
+    background: rgb(3, 0, 0);
+    color: #fff;
+    padding: 10px 30px;
+    text-decoration: none;
+    text-align: left;
+    align-content: left;
+
+}
+
+.Landing_Page:hover {
+    background: rosybrown;
+}
+
+.DogsCreate:hover {
+    background: rosybrown;
+}
+
+.home:hover {
+    background: rosybrown;
+}

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDogs, OrderByName, FilterByTemperament, getTemperaments, FilterByRaza, filterCreated, OrderByWeight } from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 import Card from './Card/Card';
-import './Home.css';
+import style from './Home.module.css';
 import Paginado from './Paginado/Paginado';
 import SearchBar from './SearchBar/SearchBar';
 
@@ -64,14 +64,16 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className={`${style.main_container}`}>
+      <div className={`${style.titleApp}`}>
       <h1>ALL DOGS</h1>
-      <button className="p-cargar" onClick={e => { handleClick(e) }}>
+      </div>
+      <button className={`${style.p_cargar}`} onClick={e => { handleClick(e) }}>
         Volver a cargar todos
       </button>
 
-      <div className="container-todos-select">
-        <div className="select-container">
+      <div className={`${style.container_todos_select}`}>
+        <div className={`${style.select_container}`}>
           <select onChange={handleOrderByName}>
             <option value={orden}>
               Orden Alfabetico
@@ -80,7 +82,7 @@ function Home() {
             <option value="Z-A">Z-A</option>
           </select>
         </div>
-        <div className="select-container">
+        <div className={`${style.select_container}`}>
           <select onChange={handleOrderByWeight}>
             <option disabled selected defaultValue>
               Ordenar por peso
@@ -89,7 +91,7 @@ function Home() {
             <option value="min_weight">Min</option>
           </select>
         </div>
-        <div className="select-container">
+        <div className={`${style.select_container}`}>
           <select onChange={handleFilterByTemperament}>
             <option disabled selected defaultValue>Temperaments</option>
             <option value="Todos">All</option>
@@ -100,7 +102,7 @@ function Home() {
             }
           </select>
         </div>
-        <div className="select-container">
+        <div className={`${style.select_container}`}>
           <select onChange={handleFilterByRaza}>
             <option disabled selected defaultValue>Razas</option>
             <option value="Todos">All</option>
@@ -111,7 +113,7 @@ function Home() {
             }
           </select>
         </div>
-        <div className="select-container">
+        <div className={`${style.select_container}`}>
           <select onChange={e => handleFilterCreated(e)}>
             <option value="created">Creados</option>
             <option value="api">Existente</option>
@@ -127,11 +129,11 @@ function Home() {
 
       </nav>
       <SearchBar></SearchBar>
-      <div className="dogs-container">
+      <div className={`${style.dogs_container}`}>
         {currentDogs?.map((c) => {
           return (
             <div>
-              <Link to={'/dogs/' + c.id}>
+              <Link style={{textDecoration: "none"}} to={'/dogs/' + c.id}>
                 <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[0] + ' a ' + c.weight[1]} />
               </Link>
             </div>

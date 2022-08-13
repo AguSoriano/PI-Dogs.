@@ -25,11 +25,6 @@ export default function reducer(state = initialState, { type, payload }) {
     switch (type) {
 
         case GET_DOGS:
-            /*payload.forEach(element => {
-                if (!element.temperament[0]) {
-                  element.temperament[0] = "no-temperaments" //eliminamos arreglos vacios de temperamentos
-                }
-              });*/
             return {
                 ...state,
                 dogs: payload,

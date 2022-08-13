@@ -2,31 +2,38 @@ import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { postDogs, getTemperaments } from '../../redux/actions/index';
 import { useDispatch, useSelector } from 'react-redux';
+import style from './DogsCreate.module.css'
 
-
-/*
-function validate(input){
-  let errors = {};
-  if (!input.name){
-    errors.name = "Se requiere un nombre";
-  }else if(!input.weight){
-    errors.weight = "Se requiere un peso";
+const validate = (input) => {
+  let errors = {}
+  if(!input.name) {
+      errors.name = "Name is required, it should not contain numbers"
   }
-  return errors;
-};
-*/
+  if(!input.height) {
+      errors.height = "Height is required"
+  }
+  if(!input.weight) {
+      errors.weight = "Weight is required"
+  }
+  if(!input.life_span) {
+      errors.life_span = "Lifespan is required, type only numbers separated by a dash (-)"
+  }
+  return errors
+}
 
 export default function DogsCreate() {
   const dispatch = useDispatch()
   const history = useHistory()
   const temperaments = useSelector((state) => state.temperaments)
-  /*const [errors,setErrors] = useState({}) */
 
-  /*despues del onChange en el render
-  {errors.name && (
-    <p className='error'>{errors.name}</p>
-  )}
-  */
+  const [button, setButton] = useState(true);
+    const [errors, setErrors] = useState({
+        name: "",
+        height: [],
+        weight: [],
+        life_span:  "",
+        image: "",
+    });
 
   const [input, setInput] = useState({
     name: "",
@@ -42,7 +49,10 @@ export default function DogsCreate() {
       ...input,
       [e.target.name]: e.target.value
     })
-
+    setErrors(validate({
+      ...input,
+      [e.target.name] : e.target.value
+  }))
   }
 
   function handleSelect(e) {
@@ -69,8 +79,7 @@ export default function DogsCreate() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-
+    e.preventDefault(); //sirve para prevenir la accion por defecto del submit
     dispatch(postDogs(input)).then((result) => {
       alert('Dogs creado :)');
       setInput({
@@ -95,58 +104,74 @@ export default function DogsCreate() {
     })
   }
 
+  useEffect(()=>{
+    if (input.name.length > 0 && input.height.length > 0  &&  input.weight.length > 0) setButton(false)
+    else setButton(true)
+}, [input, setButton]);
+
   useEffect(() => {
     dispatch(getTemperaments());
   }, [dispatch]);
 
   return (
-    <div>
-      <Link to='/dogs'><button>Volver</button></Link>
-      <h1>Creá tu dogs</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <div>
+    <div className= {style.fondo_imagen}>
+    <div className= {style.fondo}>
+      <div className= {style.container}>
+      <div >
+      <Link to='/dogs'><button className= {style.button_to_home}>Volver</button></Link>
+      </div>
+      <div className={style.titulo}>
+      <h1>Creá tu dog</h1>
+      </div>
+      <form className={style.formulario} onSubmit={(e) => handleSubmit(e)}>
+        <div className={style.input}>
           <label>Name:</label>
           <input
             type="text"
             value={input.name}
             name="name"
+            placeholder="Required"
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div >
+        <div>{errors.name}</div>
+        <div className={style.input}>
           <label>Height_Min:</label>
-          <input id='Height_Min' type="number" name="height" placeholder="Min height..." onChange={(e) => handleSelect_Height_Min(e)} required />
-
+          <input id='Height_Min' type="number" name="height" placeholder="Required" onChange={(e) => handleSelect_Height_Min(e)} />
         </div>
-
-        <div>
+        <div>{errors.height}</div>
+        <div className={style.input}>
           <label>Height_Max:</label>
-          <input id='Height_Max' type="number" name="height" placeholder="Max height..." onChange={(e) => handleSelect_Height_Max(e)} />
+          <input id='Height_Max' type="number" name="height" placeholder="Required" onChange={(e) => handleSelect_Height_Max(e)} />
         </div>
-        <div>
+        
+        <div className={style.input}>
           <label>Weight_Min:</label>
-          <input id='Weight_Min' type="number" name="weight" placeholder="Min weight..." onChange={(e) => handleSelect_Weight_Min(e)} />
+          <input id='Weight_Min' type="number" name="weight" placeholder="Required" onChange={(e) => handleSelect_Weight_Min(e)} />
         </div>
-
-        <div>
+        <div>{errors.weight}</div>
+        <div className={style.input}>
           <label>Weight_Max:</label>
-          <input id='Weight_Max' type="number" name="weight" placeholder="Max weight..." onChange={(e) => handleSelect_Weight_Max(e)} />
+          <input id='Weight_Max' type="number" name="weight" placeholder="Required" onChange={(e) => handleSelect_Weight_Max(e)} />
         </div>
-        <div>
+        <div>{errors.weight}</div>
+        <div className={style.input}>
           <label>Years_Of_Life:</label>
           <input
             type="number"
             value={input.years_of_life}
             name="years_of_life"
+            placeholder="Required" 
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <div>
+        <div className={style.input}>
           <label>Image:</label>
           <input
             type="text"
             value={input.image}
             name="image"
+            placeholder="Url-NoRequired" 
             onChange={(e) => handleChange(e)}
           />
         </div>
@@ -156,24 +181,19 @@ export default function DogsCreate() {
           ))}
         </select>
         <ul><li>{input.temperament.map(el => el + " ,")}</li></ul>
-        <button type='submit'>Crear dogs</button>
+        <button className={style.button_to_home} type='submit' disabled={button}>Crear dogs</button>
       </form>
+      <div className={style.container_temperaments}>
       {input.temperament.map(el =>
-        <div className='divTemp'>
+      <div className={style.element_temperament}>
           <p>{el}</p>
-          <button className='botonX' onClick={() => handleDelete(el)}>X</button>
-        </div>
+          <button onClick={() => handleDelete(el)}>X</button>
+          </div>
       )}
+      </div>
+      </div>
+    </div>
     </div>
   )
 }
 
-/*<div>
-          <label>Weight:</label>
-          <input
-          type= "text"
-          value= {input.weight}
-          name= "weight"
-          onChange={(e) => handleChange(e)}
-          />
-        </div> */

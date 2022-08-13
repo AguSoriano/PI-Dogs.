@@ -1,15 +1,17 @@
-.searchbar {
+.searchBar {
     border: solid 2px;
     border-color: #6D8BE8;
     border-radius: 20px;
     height: 30px;
     width: 270px;
     margin-top: 40px;
-    background-color: #FFFCF5;
+    background: rgb(37, 36, 36);
+    color: white;
 }
 .btn{
     border: solid 2px;
     border-color: #6D8BE8;
     border-radius: 20px;
-    background-color: #FFFCF5;
+    background: rgb(37, 36, 36);
+    color: white;
 }
