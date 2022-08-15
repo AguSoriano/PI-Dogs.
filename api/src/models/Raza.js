@@ -25,10 +25,10 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     years_of_life:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
     },
     image:{
-      type: DataTypes.JSON(DataTypes.STRING),
+      type: DataTypes.STRING,
     },
     createdInBd: {
       type: DataTypes.BOOLEAN,

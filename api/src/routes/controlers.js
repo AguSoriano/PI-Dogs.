@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-const { Raza, Temperamento} = require('../db.js');
+const { Raza, Temperamento } = require('../db.js');
 const { API_KEY } = process.env;
 
 const link = `https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`
@@ -10,6 +10,7 @@ const totalApi = async () => {
     const { data } = await axios.get(link)
     //console.log(data)
     //let temperaments = data.map (i => i.temperament).join ().split (',');
+    console.log('mapppppp');
     const info = await data.map(i => {
 
         let temperamentArray = [];
@@ -70,10 +71,10 @@ const getDogs = async (req, res) => {
     };
 };
 const getTemperaments = async (req, res) => {
-    const { data } = await axios.get('https://api.thedogapi.com/v1/breeds');
-    console.log('111111',data)
+    const { data } = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
+
     let temperaments = data.map(i => i.temperament).join().split(',');
-    console.log('222222',temperaments)
+
     await temperaments.forEach(async name => {
         if (name)
             await Temperamento.findOrCreate({
@@ -98,34 +99,41 @@ const getDogsById = async (req, res) => {
 };
 const postDogs = async (req, res) => {
 
+
     try {
         let {
             name,
-            height = [],
-            weight = [],
+            height,
+            weight,
             years_of_life,
-            temperament = [],
-            image = {},
+            temperament,
+            image,
             createdInBd
         } = req.body
-        console.log('333333',temperament)
+        if (
+            typeof name !== 'string' ||
+            typeof image !== 'string' ||
+            typeof years_of_life !== 'number') {
+            res.status(400).json({
+                error: "Bad request: {name, tiene que ser un string} {image: tiene que ser un string}{years_of_life: tiene que ser un numero"
+            })
+        }
         const razaCreated = await Raza.create({
             name,
             height,
             weight,
             years_of_life,
-            image,
+            image: image ? image : "https://www.publicdomainpictures.net/pictures/260000/velka/dog-face-cartoon-illustration.jpg",
             createdInBd
         })
         let temperamentoDb = await Temperamento.findAll({
             where: { name: temperament }//dentro de este modelo encontra 
         })
         razaCreated.addTemperamento(temperamentoDb);//addTemperamento es un metodo de sequelize que me trae de la tabla lo que le paso
-        console.log(razaCreated)
-        return res.status(200).send('Personaje creado con exito');
-        
+        return res.status(200).send('Dog creado con exito');
+
     } catch (err) {
-        return res.status(500).send(err);
+        return res.status(500).send('error creación dogs');
     }
 };
 const deleteDogs = async (req, res) => {

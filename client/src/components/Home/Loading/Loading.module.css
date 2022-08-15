@@ -1,0 +1,8 @@
+.loader_container{
+    width: 600px;
+    object-fit: cover;
+    align-items: center;
+}
+.loader{
+    width: 50px;
+}

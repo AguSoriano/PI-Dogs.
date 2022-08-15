@@ -1,6 +1,8 @@
 .titleApp{
-    color: rgb(179, 62, 62);
+    color: rgb(62, 179, 173);
     font-size: 1rem;
+    text-align: right;
+    padding-right: 50px;
 }
 
 .main_container{

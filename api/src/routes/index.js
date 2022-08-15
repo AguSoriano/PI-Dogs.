@@ -14,9 +14,9 @@ const {
 } = require('./controlers.js');
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+// Ejemplo: router.use('/auth', authRouter); 
 
-router.get('/dogs', getDogs);
+router.get('/dogs',getDogs);
 
 router.get ('/temperaments', getTemperaments)
 

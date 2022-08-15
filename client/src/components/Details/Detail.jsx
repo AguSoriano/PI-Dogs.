@@ -4,13 +4,14 @@ import {getDetail} from '../../redux/actions/index';
 import{useEffect} from 'react';
 import style from './Details.module.css'
 import { Link } from "react-router-dom";
+import Loading from '../Home/Loading/Loading';
 
 export default function Detail(props){
   console.log(props)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getDetail(props.match.params.id));
-  })
+  },[])
 
   const myDog = useSelector((state) => state.details)
 
@@ -38,13 +39,13 @@ export default function Detail(props){
            Peso: {myDog[0].weight[0] + ' a ' + myDog[0].weight[1] + ' kg.'}
           </h3>
           <h3>
-           Años de vida: {myDog[0].years_of_life.replace('years','')}
+           Años de vida: {!myDog[0].createdInBd? myDog[0].years_of_life.replace('years',''):myDog[0].years_of_life }
           </h3>
           <h3>
            Temperamentos: {!myDog[0].createdInBd? myDog[0].temperament + ',': myDog[0].temperamentos.map(el => el.name + (','))}
           </h3>
           </div>
-        </div> : <p>Loading...</p>
+        </div> : <Loading/>
       }
     </div>
     </div>

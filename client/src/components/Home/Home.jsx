@@ -16,11 +16,11 @@ function Home() {
   const [orden, setOrden] = useState("");
   const [currentPage, setCurrentPage] = useState(1) //Esto es un estado local, aca estoy guardando la primer pagina
   const [dogsPerPage, setDogsPerPage] = useState(8) //Aca estoy seteando cuandos dogs quiero por pagina
-  const indexOfLastDog = currentPage * dogsPerPage //esto guardando la pagina actual por la cantidad de dogs //8
+  const indexOfLastDog = currentPage * dogsPerPage //estoy guardando la pagina actual por la cantidad de dogs //8
+  const next = Math.ceil(allDogs.length/dogsPerPage)
   const indexOfFirstDog = indexOfLastDog - dogsPerPage //0
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog) // estoy tomando sobre todos mis dogs, el indice de mi primer dog hasta el ultimo
   //slice toma un arreglo y agarra la porcion que le pase por parametro, osea desde el dogs(0) hasta el dogs(8)
-
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
@@ -63,10 +63,22 @@ function Home() {
     setOrden(`Ordenado ${e.target.value}`);
   };
 
+  const handlePrevClick = () => {
+    if(currentPage > 1){
+      paginado(currentPage - 1)
+    }
+  }
+
+  const handleNextClick = () => {
+    if(currentPage < next){
+      paginado(currentPage + 1)
+    }
+  }
+
   return (
     <div className={`${style.main_container}`}>
       <div className={`${style.titleApp}`}>
-      <h1>ALL DOGS</h1>
+      <h1>DOGPEDIA</h1>
       </div>
       <button className={`${style.p_cargar}`} onClick={e => { handleClick(e) }}>
         Volver a cargar todos
@@ -126,10 +138,12 @@ function Home() {
           allDogs={allDogs.length}
           paginado={paginado}
         />
-
+        <button className={`${style.p_cargar}`} onClick={handlePrevClick}>Prev</button> 
+        <button className={`${style.p_cargar}`} onClick={handleNextClick}>Next</button> 
       </nav>
       <SearchBar></SearchBar>
       <div className={`${style.dogs_container}`}>
+      
         {currentDogs?.map((c) => {
           return (
             <div>

@@ -12,7 +12,8 @@
     
 }
 .container{
-    width: 40%;
+    width: 1200px;
+    align-items: center;
 }
 .button_to_home{
     
@@ -28,6 +29,10 @@
 }
 .button_to_home:hover{
     color: #e5f1ee;
+}
+
+.inputError{
+    color: tomato;
 }
 
 
@@ -46,17 +51,18 @@
     background-color: rgb(227, 243, 242);
     padding: 1rem 0;
     border-radius: 15px;
+    text-align: right; 
+
+}
+
+.labelForm{
+    margin-left: 5px;
 }
 
 .input{
     border: none;
-    border-bottom: 1px solid #25b687;
-    height: 1.2rem;
-    font-size: 1.1rem;
-    outline: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    margin-top: 5px;
+    text-align: right; 
 }
 
 .container_temperaments{
