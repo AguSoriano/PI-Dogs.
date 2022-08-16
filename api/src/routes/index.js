@@ -8,7 +8,7 @@ const {
     getDogs, 
     getTemperaments, 
     getDogsById, 
-    postDogs
+    postDogs,
 
 } = require('./controlers.js');
 

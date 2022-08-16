@@ -7,19 +7,19 @@ import Card from './Card/Card';
 import style from './Home.module.css';
 import Paginado from './Paginado/Paginado';
 import SearchBar from './SearchBar/SearchBar';
-
+import Loading from '../Home/Loading/Loading';
 
 function Home() {
   const dispatch = useDispatch()
-  const allDogs = useSelector((state) => state.dogs) 
+  const allDogs = useSelector((state) => state.dogs)
   const allTemperaments = useSelector(state => state.temperaments);
   const [orden, setOrden] = useState("");
-  const [currentPage, setCurrentPage] = useState(1) 
-  const [dogsPerPage, setDogsPerPage] = useState(8) 
-  const indexOfLastDog = currentPage * dogsPerPage 
-  const next = Math.ceil(allDogs.length/dogsPerPage)
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage 
-  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog) 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [dogsPerPage, setDogsPerPage] = useState(8)
+  const indexOfLastDog = currentPage * dogsPerPage
+  const next = Math.ceil(allDogs.length / dogsPerPage)
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage
+  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog)
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
@@ -32,12 +32,12 @@ function Home() {
   }, [dispatch])
 
   function handleClick(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     dispatch(getDogs());
   }
 
   function handleFilterCreated(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     dispatch(filterCreated(e.target.value));
   }
 
@@ -64,13 +64,13 @@ function Home() {
   };
 
   const handlePrevClick = () => {
-    if(currentPage > 1){
+    if (currentPage > 1) {
       paginado(currentPage - 1)
     }
   }
 
   const handleNextClick = () => {
-    if(currentPage < next){
+    if (currentPage < next) {
       paginado(currentPage + 1)
     }
   }
@@ -78,7 +78,7 @@ function Home() {
   return (
     <div className={style.main_container}>
       <div className={style.titleApp}>
-      <h1>DOGPEDIA</h1>
+        <h1>DOGPEDIA</h1>
       </div>
       <button className={style.p_cargar} onClick={e => { handleClick(e) }}>
         Refresh
@@ -88,7 +88,7 @@ function Home() {
         <div className={style.select_container}>
           <select onChange={handleOrderByName}>
             <option value={orden}>
-            Alphabetical order
+              Alphabetical order
             </option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
@@ -138,21 +138,26 @@ function Home() {
           allDogs={allDogs.length}
           paginado={paginado}
         />
-        <button className={style.p_cargar} onClick={handlePrevClick}>Prev</button> 
-        <button className={style.p_cargar} onClick={handleNextClick}>Next</button> 
+        <button className={style.p_cargar} onClick={handlePrevClick}>Prev</button>
+        <button className={style.p_cargar} onClick={handleNextClick}>Next</button>
       </nav>
       <SearchBar></SearchBar>
+
       <div className={style.dogs_container}>
-      
+
         {currentDogs?.map((c) => {
           return (
             <div>
-              <Link style={{textDecoration: "none"}} to={'/dogs/' + c.id}>
+              <Link style={{ textDecoration: "none" }} to={'/dogs/' + c.id}>
                 <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[0] + ' a ' + c.weight[1]} />
               </Link>
             </div>
           )
-        })}
+        })
+        }{
+          currentDogs.length > 0 ?
+            <div></div> : <Loading />
+        }
       </div>
     </div>
   )

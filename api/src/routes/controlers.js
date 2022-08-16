@@ -85,6 +85,7 @@ const getTemperaments = async (req, res) => {
 const getDogsById = async (req, res) => {
 
     const { id } = req.params
+    
     const dogsTotal = await tot_Api_Db()
     if (id) {
         let dogsId = await dogsTotal.filter(i => i.id == id)
@@ -140,11 +141,10 @@ const postDogs = async (req, res) => {
     }
 };
 
-
 module.exports = {
     tot_Api_Db,
     getDogs,
     getTemperaments,
     getDogsById,
-    postDogs
+    postDogs,
 }
