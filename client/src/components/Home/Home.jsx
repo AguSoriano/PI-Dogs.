@@ -1,5 +1,4 @@
 import React from 'react'
-//utilizamos hooks con el componente funcional
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogs, OrderByName, FilterByTemperament, getTemperaments, FilterByRaza, filterCreated, OrderByWeight } from '../../redux/actions/index';
@@ -9,18 +8,19 @@ import style from './Home.module.css';
 import Paginado from './Paginado/Paginado';
 import SearchBar from './SearchBar/SearchBar';
 
+
 function Home() {
-  const dispatch = useDispatch()//para utilizar esta constante que despache mis acciones
-  const allDogs = useSelector((state) => state.dogs) //es lo mismo que hacer mapStateToProps
-  const allTemperaments = useSelector(state => state.temperaments);//llamando a mis estados globales
+  const dispatch = useDispatch()
+  const allDogs = useSelector((state) => state.dogs) 
+  const allTemperaments = useSelector(state => state.temperaments);
   const [orden, setOrden] = useState("");
-  const [currentPage, setCurrentPage] = useState(1) //Esto es un estado local, aca estoy guardando la primer pagina
-  const [dogsPerPage, setDogsPerPage] = useState(8) //Aca estoy seteando cuandos dogs quiero por pagina
-  const indexOfLastDog = currentPage * dogsPerPage //estoy guardando la pagina actual por la cantidad de dogs //8
+  const [currentPage, setCurrentPage] = useState(1) 
+  const [dogsPerPage, setDogsPerPage] = useState(8) 
+  const indexOfLastDog = currentPage * dogsPerPage 
   const next = Math.ceil(allDogs.length/dogsPerPage)
-  const indexOfFirstDog = indexOfLastDog - dogsPerPage //0
-  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog) // estoy tomando sobre todos mis dogs, el indice de mi primer dog hasta el ultimo
-  //slice toma un arreglo y agarra la porcion que le pase por parametro, osea desde el dogs(0) hasta el dogs(8)
+  const indexOfFirstDog = indexOfLastDog - dogsPerPage 
+  const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog) 
+
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
@@ -29,15 +29,15 @@ function Home() {
   useEffect(() => {
     dispatch(getDogs())
     dispatch(getTemperaments());
-  }, [dispatch])//dentro del arreglo coloco lo que tenga dependencia con useEffect
+  }, [dispatch])
 
   function handleClick(e) {
-    e.preventDefault(); //para que no se recargue y rompa
+    e.preventDefault(); 
     dispatch(getDogs());
   }
 
   function handleFilterCreated(e) {
-    e.preventDefault(); //para que no se recargue y rompa
+    e.preventDefault(); 
     dispatch(filterCreated(e.target.value));
   }
 
@@ -76,34 +76,34 @@ function Home() {
   }
 
   return (
-    <div className={`${style.main_container}`}>
-      <div className={`${style.titleApp}`}>
+    <div className={style.main_container}>
+      <div className={style.titleApp}>
       <h1>DOGPEDIA</h1>
       </div>
-      <button className={`${style.p_cargar}`} onClick={e => { handleClick(e) }}>
-        Volver a cargar todos
+      <button className={style.p_cargar} onClick={e => { handleClick(e) }}>
+        Refresh
       </button>
 
-      <div className={`${style.container_todos_select}`}>
-        <div className={`${style.select_container}`}>
+      <div className={style.container_todos_select}>
+        <div className={style.select_container}>
           <select onChange={handleOrderByName}>
             <option value={orden}>
-              Orden Alfabetico
+            Alphabetical order
             </option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
           </select>
         </div>
-        <div className={`${style.select_container}`}>
+        <div className={style.select_container}>
           <select onChange={handleOrderByWeight}>
             <option disabled selected defaultValue>
-              Ordenar por peso
+              Order by weight
             </option>
             <option value="max_weight">Max</option>
             <option value="min_weight">Min</option>
           </select>
         </div>
-        <div className={`${style.select_container}`}>
+        <div className={style.select_container}>
           <select onChange={handleFilterByTemperament}>
             <option disabled selected defaultValue>Temperaments</option>
             <option value="Todos">All</option>
@@ -114,9 +114,9 @@ function Home() {
             }
           </select>
         </div>
-        <div className={`${style.select_container}`}>
+        <div className={style.select_container}>
           <select onChange={handleFilterByRaza}>
-            <option disabled selected defaultValue>Razas</option>
+            <option disabled selected defaultValue>Breeds</option>
             <option value="Todos">All</option>
             {
               allDogs?.map(i => (
@@ -125,10 +125,10 @@ function Home() {
             }
           </select>
         </div>
-        <div className={`${style.select_container}`}>
+        <div className={style.select_container}>
           <select onChange={e => handleFilterCreated(e)}>
-            <option value="created">Creados</option>
-            <option value="api">Existente</option>
+            <option value="created">Created</option>
+            <option value="api">Existing</option>
           </select>
         </div>
       </div>
@@ -138,11 +138,11 @@ function Home() {
           allDogs={allDogs.length}
           paginado={paginado}
         />
-        <button className={`${style.p_cargar}`} onClick={handlePrevClick}>Prev</button> 
-        <button className={`${style.p_cargar}`} onClick={handleNextClick}>Next</button> 
+        <button className={style.p_cargar} onClick={handlePrevClick}>Prev</button> 
+        <button className={style.p_cargar} onClick={handleNextClick}>Next</button> 
       </nav>
       <SearchBar></SearchBar>
-      <div className={`${style.dogs_container}`}>
+      <div className={style.dogs_container}>
       
         {currentDogs?.map((c) => {
           return (
@@ -157,6 +157,5 @@ function Home() {
     </div>
   )
 }
-/*temperaments={el.temperaments[0].name ? el.temperaments.map(el => el.name) : el.temperaments} */
+
 export default Home
-//weight={typeof c.weight !== 'string'?c.weight[0] + ' a ' + c.weight[1]:c.weight}

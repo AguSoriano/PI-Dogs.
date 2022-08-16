@@ -4,16 +4,16 @@ import style from "../LandingPage/LandingPage.module.css";
 
 function LandingPage() {
   return (
-    <div className={`${style.main_container}`}>
-      <div className={`${style.main_left_container}`}>
-        <h1 className={`${style.titleApp}`} >DOGPEDIA</h1>
-        <h3>Todo sobre el mejor amigo del hombre</h3>
-        <div className={`${style.left_paragraph}`}>
-          <p>Aquí tu puedes encontrar informacion relevante sobre tu raza favorita y otras!</p>
+    <div className={style.main_container}>
+      <div className={style.main_left_container}>
+        <h1 className={style.titleApp} >DOGPEDIA</h1>
+        <h3>All about man's best friend</h3>
+        <div className={style.left_paragraph}>
+          <p>Here you can find relevant information about your favorite breed and others!</p>
         </div>
         
         <Link to="/dogs">
-            <button className={`${style.button_home}`}>COMENZAR</button>
+            <button className={style.button_home}>START</button>
         </Link>
       </div>
     </div>

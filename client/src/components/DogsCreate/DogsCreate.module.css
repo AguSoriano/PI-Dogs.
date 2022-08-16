@@ -1,48 +1,65 @@
-.fondo_imagen{
+.fondo_imagen {
     background-image: url("./imagenes/imagen8.jpeg");
     background-size: initial;
-    
-    
+
 }
-.fondo{
+
+.fondo {
     display: flex;
-    justify-content:initial;
-    padding-top: 100px;
+    justify-content: initial;
+    padding-top: 10px;
     padding-left: 120px;
+
+}
+
+.container {
+    width: 40%;
     
 }
-.container{
-    width: 1200px;
-    align-items: center;
-}
-.button_to_home{
+.button_clear{
+    width: 70px;
+    max-width: 370px;
+    font-size: 1.2rem;
+    border-radius: 100px;
+    padding: 0.65rem 0.6rem;
+    border: 0.1rem solid rgb(14, 0, 0);
+    outline: 0.1rem solid #012419;
+    text-shadow: 0 0 3px #25b687;
+    background-color: rgb(47, 110, 97); 
     
+}
+
+.button_to_home {
+
     width: 45%;
     max-width: 370px;
-    font-size: 1.2rem; 
+    font-size: 1.2rem;
     border-radius: 100px;
     padding: 0.65rem 0.6rem;
     border: 0.1rem solid rgb(14, 0, 0);
     outline: 0.1rem solid #012419;
     text-shadow: 0 0 3px #25b687;
     background-color: rgb(47, 110, 97);
+    
 }
-.button_to_home:hover{
+
+.button_to_home:hover {
     color: #e5f1ee;
 }
 
-.inputError{
+.inputError {
     color: tomato;
 }
 
 
-.titulo{
+.titulo {
     color: rgb(129, 192, 184);
     font-size: 2rem;
     width: 800px;
     text-align: justify;
 }
-.formulario{
+
+.formulario {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,28 +68,29 @@
     background-color: rgb(227, 243, 242);
     padding: 1rem 0;
     border-radius: 15px;
-    text-align: right; 
+    
 
 }
 
-.labelForm{
+.labelForm {
     margin-left: 5px;
 }
 
-.input{
+.input {
     border: none;
     margin-top: 5px;
-    text-align: right; 
+    text-align: right;
 }
 
-.container_temperaments{
+.container_temperaments {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 0 7px;
     align-items: center;
     justify-items: center;
 }
-.element_temperament{
+
+.element_temperament {
     max-height: 70px;
     border-radius: 10px;
     margin: 5px 0;

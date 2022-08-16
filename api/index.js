@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3001;
 //se nos pase este puerto
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => { //el force true lo que hace es que cada vez que corto la base de datos lo vuelve a generar de nuevo
+conn.sync({ force: false }).then(() => { //el force true lo que hace es que cada vez que corto la base de datos lo vuelve a generar de nuevo
   server.listen(PORT, () => { //iniciamos el servidor
     console.log(`Servidor corriendo en el puerto ${PORT}`); // eslint-disable-line no-console
   });

@@ -25,12 +25,12 @@ function SearchBar() {
   return (
     <div>
       <input
-      className={`${style.searchBar}`}
+      className={style.searchBar}
       type = 'text'
-      placeholder='Buscar...raza'
+      placeholder='Search...breed'
       onChange = {(e) => handleInputChange(e)}
       />
-      <button className={`${style.btn}`} type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>
+      <button className={style.btn} type='submit' onClick={(e) => handleSubmit(e)}>Search</button>
       </div>
   )
 };

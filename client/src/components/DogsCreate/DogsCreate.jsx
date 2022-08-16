@@ -5,15 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from './DogsCreate.module.css'
 import validate from './validate';
 
-
-/*input.height[0] >= 10 &&
-      input.height[1] <= 150 &&
-      input.height[1] >= 11 &&
-      input.weight[0] >= 1 &&
-      input.weight[1] <= 100 &&
-      input.weight[1] >= 2 &&
-      input.years_of_life <= 20 */
-
 export default function DogsCreate() {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -29,7 +20,7 @@ export default function DogsCreate() {
     temperament: [],
     image: "",
   })
-
+  console.log(input)
   function handleChange(e) {
     setInput({
       ...input,
@@ -47,7 +38,7 @@ export default function DogsCreate() {
         ...input,
         temperament: [...input.temperament, e.target.value]
       });
-    }else{
+    } else {
       alert('El temperamento ya fue seleccionado');
     }
 
@@ -93,18 +84,18 @@ export default function DogsCreate() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault(); //sirve para prevenir la accion por defecto del submit
+    
+    e.preventDefault(); 
     try {
       if (
         !errors.name &&
-        !errors.heightMin &&
-        !errors.heightMax &&
-        !errors.weightMin &&
-        !errors.weightMax &&
+        !errors.height &&
+        !errors.weight &&
         !errors.image &&
         !errors.temperament &&
         !errors.years_of_life
       ) {
+        console.log(input)
         dispatch(postDogs(input));
         alert('Dogs creado :)');
         setInput({
@@ -148,10 +139,10 @@ export default function DogsCreate() {
       <div className={style.fondo}>
         <div className={style.container}>
           <div >
-            <Link to='/dogs'><button className={style.button_to_home}>Volver</button></Link>
+            <Link to='/dogs'><button className={style.button_to_home}>Home</button></Link>
           </div>
           <div className={style.titulo}>
-            <h1>Creá tu dog</h1>
+            <h1>Create dog</h1>
           </div>
           <form className={style.formulario} onSubmit={(e) => handleSubmit(e)}>
             <div className={style.input}>
@@ -216,8 +207,9 @@ export default function DogsCreate() {
                 <span>{errors.temperament}</span>
               ) : null}
             </div>
-            <div> <button type='reset' onClick={handleReset}>Clean</button> </div>
-            <button className={style.button_to_home} type='submit'>Crear dogs</button>
+            <div> <button className={style.button_clear} type='reset' onClick={handleReset}>Clear</button> </div>
+            <br></br>
+            <button className={style.button_to_home} type='submit'>Create dogs</button>
           </form>
           <div className={style.container_temperaments}>
             {input.temperament.map(el =>

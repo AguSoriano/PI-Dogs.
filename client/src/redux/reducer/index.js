@@ -136,8 +136,13 @@ export default function reducer(state = initialState, { type, payload }) {
 
         case FILTER_CREATED:
 
+            if (state.allDogs.length === 0) {
+                state.allDogs = state.dogs;
+            } 
+
             const allDogs = state.allDogs
             console.log(allDogs)
+            
             const createdFilter = payload === 'created' ? allDogs.filter(el => el.createdInBd) : allDogs.filter(el => !el.createdInBd)
             return {
                 ...state,
