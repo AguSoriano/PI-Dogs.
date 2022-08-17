@@ -9,13 +9,13 @@ import {
     GET_FILTER_RAZA,
     FILTER_CREATED,
     GET_NAME_DOGS,
-    GET_DETAILS,
-    ORDER_BY_HEIGHT
+    GET_DETAILS
+   
 } from "./ActionsTypes";
 
 const { API_KEY } = process.env;
 
-//Acá sucede toda la conecxion entre el front y el back
+
 export function getDogs() {
     return async function (dispatch) {
         let json = await axios.get(`http://localhost:3001/dogs?api_key=${API_KEY}`, {
@@ -82,7 +82,7 @@ export function getNameDogs(name) {
             const json = await axios.get(`http://localhost:3001/dogs?name=${name}`)
             return dispatch({
                 type: GET_NAME_DOGS,
-                payload: json.data //esto es lo que devuelve la ruta
+                payload: json.data 
             })
         } catch (error) {
             console.log(error)
@@ -93,7 +93,6 @@ export function getNameDogs(name) {
 export function postDogs(payload) {
     return async function (dispatch) {
         const response = axios.post(`http://localhost:3001/dogs?api_key=${API_KEY}`, payload)
-        console.log(response)
         return response;
     }
 }
