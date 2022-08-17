@@ -9,3 +9,4 @@ export const GET_NAME_DOGS = "GET_NAME_DOGS";
 export const POST_DOGS = "POST_DOGS";
 export const GET_DETAILS = "GET_DETAILS";
 
+

@@ -31,9 +31,8 @@ function Home() {
     dispatch(getTemperaments());
   }, [dispatch])
 
-  function handleClick(e) {
-    e.preventDefault();
-    dispatch(getDogs());
+  function refresh(e){
+    window.location.reload()
   }
 
   function handleFilterCreated(e) {
@@ -82,7 +81,7 @@ function Home() {
       <div className={style.titleApp}>
         <h1>DOGPEDIA</h1>
       </div>
-      <button className={style.p_cargar} onClick={e => { handleClick(e) }}>
+      <button className={style.p_cargar} onClick={e => { refresh(e) }}>
         Refresh
       </button>
 

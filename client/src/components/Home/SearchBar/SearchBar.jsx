@@ -14,12 +14,15 @@ function SearchBar() {
   function handleInputChange(e){
     e.preventDefault()
     setName(e.target.value)
-    console.log(name)
   }
 
-  function handleSubmit(e){
+   function handleSubmit(e){
     e.preventDefault()
-    dispatch(getNameDogs(name))
+    dispatch(getNameDogs(name)).then(resp =>{
+      if(resp.code && resp.code ==='ERR_BAD_REQUEST'){
+         alert('There is not dog with that name');
+      }
+    });
   }
 
   return (

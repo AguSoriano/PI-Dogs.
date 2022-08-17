@@ -16,11 +16,11 @@ const {
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter); 
 
-router.get('/dogs/:id', getDogsById)
-
 router.get('/dogs',getDogs);
 
 router.get ('/temperaments', getTemperaments)
+
+router.get('/dogs/:id', getDogsById)
 
 router.post('/dogs', postDogs)
 

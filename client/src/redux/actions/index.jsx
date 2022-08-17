@@ -85,7 +85,7 @@ export function getNameDogs(name) {
                 payload: json.data 
             })
         } catch (error) {
-            console.log(error)
+            return error;
         }
     }
 }
