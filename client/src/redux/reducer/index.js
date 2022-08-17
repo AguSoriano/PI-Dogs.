@@ -9,7 +9,8 @@ import {
     FILTER_CREATED,
     GET_NAME_DOGS,
     POST_DOGS,
-    GET_DETAILS
+    GET_DETAILS,
+    
 } from "../actions/ActionsTypes";
 
 const initialState = {

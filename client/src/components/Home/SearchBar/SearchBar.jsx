@@ -19,7 +19,7 @@ function SearchBar() {
 
   function handleSubmit(e){
     e.preventDefault()
-    dispatch(getNameDogs(name)) //name es el payload que escribe el usuario
+    dispatch(getNameDogs(name))
   }
 
   return (
@@ -27,7 +27,7 @@ function SearchBar() {
       <input
       className={style.searchBar}
       type = 'text'
-      placeholder='Search...breed'
+      placeholder='Search...coincidences about name'
       onChange = {(e) => handleInputChange(e)}
       />
       <button className={style.btn} type='submit' onClick={(e) => handleSubmit(e)}>Search</button>

@@ -9,7 +9,8 @@ import {
     GET_FILTER_RAZA,
     FILTER_CREATED,
     GET_NAME_DOGS,
-    GET_DETAILS
+    GET_DETAILS,
+    ORDER_BY_HEIGHT
 } from "./ActionsTypes";
 
 const { API_KEY } = process.env;

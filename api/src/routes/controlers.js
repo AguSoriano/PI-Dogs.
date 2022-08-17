@@ -32,7 +32,7 @@ const totalApi = async () => {
             temperament: temperamentArray
         }
     })
-    console.log(info)
+    
     return info;
 }
 const totalDb = async () => {
@@ -114,8 +114,6 @@ const postDogs = async (req, res) => {
             res.status(400).send("Faltan datos"); /// 400 porque faltan datos
         } else if (dogName){ // si el nombre esta en la api
             res.status(404).send("El nombre del perro ya existe"); // 404 porque el nombre ya existe
-        } else if (height[1] < height[0] || weight[1] < weight[0]){
-            res.status(400).send("Los datos minimos no pueden ser mayor a los datos maximos"); // 400 porque los datos son invalidos
         } else if (height[1] > 200 || height[0] < 0 || weight[1] > 100 || weight[0] < 0 || years_of_life > 30 || years_of_life < 0){
             res.status(400).send("Datos invalidos"); // 400 porque los datos son invalidos
         } else if (temperament === null){
@@ -141,10 +139,12 @@ const postDogs = async (req, res) => {
     }
 };
 
+
 module.exports = {
     tot_Api_Db,
     getDogs,
     getTemperaments,
     getDogsById,
     postDogs,
+    
 }

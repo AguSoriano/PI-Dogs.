@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, OrderByName, FilterByTemperament, getTemperaments, FilterByRaza, filterCreated, OrderByWeight } from '../../redux/actions/index';
+import { getDogs, OrderByName, FilterByTemperament, getTemperaments, FilterByRaza, filterCreated, OrderByWeight} from '../../redux/actions/index';
 import { Link } from 'react-router-dom';
 import Card from './Card/Card';
 import style from './Home.module.css';
 import Paginado from './Paginado/Paginado';
 import SearchBar from './SearchBar/SearchBar';
 import Loading from '../Home/Loading/Loading';
+import Footer from "../Footer/Footer";
 
 function Home() {
   const dispatch = useDispatch()
@@ -24,7 +25,6 @@ function Home() {
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber)
   }
-
 
   useEffect(() => {
     dispatch(getDogs())
@@ -149,7 +149,7 @@ function Home() {
           return (
             <div>
               <Link style={{ textDecoration: "none" }} to={'/dogs/' + c.id}>
-                <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[0] + ' a ' + c.weight[1]} />
+                <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[0] + ' a ' + c.weight[1]}/>
               </Link>
             </div>
           )
@@ -159,6 +159,7 @@ function Home() {
             <div></div> : <Loading />
         }
       </div>
+      <Footer/>
     </div>
   )
 }
