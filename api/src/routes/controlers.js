@@ -138,7 +138,24 @@ const postDogs = async (req, res) => {
         return res.status(500).send('error creación dogs');
     }
 };
-
+const putDog = async (req,res) => {
+    const {id,name,weight,height,years_of_life} = req.body
+    if(!id){
+        return res.status(400).send("the id was not found")
+    }
+    try{
+        await Raza.update({
+            name,height,weight,years_of_life
+        },{
+            where : {
+                id
+            }
+        })
+        res.status(200).send("Successful registration")
+    }catch(error){
+        res.send(error)
+    }
+}
 
 module.exports = {
     tot_Api_Db,
@@ -146,5 +163,5 @@ module.exports = {
     getTemperaments,
     getDogsById,
     postDogs,
-    
+    putDog
 }

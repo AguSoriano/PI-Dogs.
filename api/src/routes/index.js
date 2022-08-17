@@ -9,7 +9,7 @@ const {
     getTemperaments, 
     getDogsById, 
     postDogs,
-    
+    putDog
 
 } = require('./controlers.js');
 
@@ -23,5 +23,7 @@ router.get('/dogs',getDogs);
 router.get ('/temperaments', getTemperaments)
 
 router.post('/dogs', postDogs)
+
+router.put('/dogs', putDog)
 
 module.exports = router;

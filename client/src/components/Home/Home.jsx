@@ -39,12 +39,13 @@ function Home() {
   function handleFilterCreated(e) {
     e.preventDefault();
     dispatch(filterCreated(e.target.value));
+    setCurrentPage(1)
   }
 
   const handleOrderByName = (e) => {
     e.preventDefault();
     dispatch(OrderByName(e.target.value));
-    setOrden(`Ordenado ${e.target.value}`);
+    setOrden(e.target.value);
   };
 
   const handleFilterByTemperament = (e) => {
@@ -60,7 +61,8 @@ function Home() {
   const handleOrderByWeight = (e) => {
     e.preventDefault();
     dispatch(OrderByWeight(e.target.value));
-    setOrden(`Ordenado ${e.target.value}`);
+    setOrden(e.target.value);
+    setCurrentPage(1)
   };
 
   const handlePrevClick = () => {
