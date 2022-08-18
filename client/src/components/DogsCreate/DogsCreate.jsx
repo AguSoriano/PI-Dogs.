@@ -20,7 +20,7 @@ export default function DogsCreate() {
     temperament: [],
     image: "",
   })
-  console.log(input)
+
   function handleChange(e) {
     setInput({
       ...input,
@@ -76,16 +76,9 @@ export default function DogsCreate() {
     }))
   }
 
-  function handleReset() {
-    setInput({
-      ...input,
-      temperament: []
-    })
-  }
-
   function handleSubmit(e) {
-    
-    e.preventDefault(); 
+
+    e.preventDefault();
     try {
       if (
         !errors.name &&
@@ -95,7 +88,7 @@ export default function DogsCreate() {
         !errors.temperament &&
         !errors.years_of_life
       ) {
-        console.log(input)
+
         dispatch(postDogs(input));
         alert('Dogs creado :)');
         setInput({
@@ -106,7 +99,7 @@ export default function DogsCreate() {
           temperament: [],
           image: "",
         })
-        history.push('/dogs') //esto me redirige
+        history.push('/dogs')
       } else {
         alert("Error, complete correctly");
       }
@@ -142,7 +135,7 @@ export default function DogsCreate() {
             <Link to='/dogs'><button className={style.button_to_home}>Home</button></Link>
           </div>
           <div className={style.titulo}>
-            <h1>Create dog</h1>
+            <h1>Create Dog</h1>
           </div>
           <form className={style.formulario} onSubmit={(e) => handleSubmit(e)}>
             <div className={style.input}>
@@ -207,8 +200,6 @@ export default function DogsCreate() {
                 <span>{errors.temperament}</span>
               ) : null}
             </div>
-            <div> <button className={style.button_clear} type='reset' onClick={handleReset}>Clear</button> </div>
-            <br></br>
             <button className={style.button_to_home} type='submit'>Create dogs</button>
           </form>
           <div className={style.container_temperaments}>

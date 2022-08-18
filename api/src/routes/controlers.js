@@ -21,7 +21,7 @@ const totalApi = async () => {
 
         let weightArray = [];
         weightArray = i.weight.metric.includes('NaN') ? i.weight.metric.replace('NaN', '0').split('-') : i.weight.metric.split('-')
-
+        
         return {
             id: i.id,
             name: i.name,
@@ -91,7 +91,7 @@ const getDogsById = async (req, res) => {
         let dogsId = await dogsTotal.filter(i => i.id == id)
         dogsId.length ?
             res.status(200).json(dogsId) :
-            res.status(404).send('No se encuentra esa raza')
+            res.status(404).send('there is not dog with that name')
     }
 };
 const postDogs = async (req, res) => {
@@ -156,6 +156,21 @@ const putDog = async (req,res) => {
         res.send(error)
     }
 }
+const deleteDogs = async (req,res) =>{
+    const {id} = req.params
+    try{
+        let dog = await Raza.findByPk(id)
+        if(!dog){
+            res.status(400).send("The dog does not exist")
+        }else{
+            dog.destroy()
+            res.status(200).send("Dog kill")
+        }
+
+    }catch(error){
+        res.send(error)
+    }
+}
 
 module.exports = {
     tot_Api_Db,
@@ -163,5 +178,6 @@ module.exports = {
     getTemperaments,
     getDogsById,
     postDogs,
-    putDog
+    putDog,
+    deleteDogs
 }

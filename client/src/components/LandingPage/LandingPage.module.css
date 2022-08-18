@@ -82,12 +82,3 @@
     transition: transform 0.5s linear;
     z-index: -10;
 }
-
-.button_home::before{ transform: rotateY(90deg); }
-
-.button_home::after{ transform: rotateX(90deg); }
-
-.button_home:hover::before,
-.button_home:hover::after{ 
-    transform: rotate(0);
-}

@@ -9,7 +9,8 @@ const {
     getTemperaments, 
     getDogsById, 
     postDogs,
-    putDog
+    putDog,
+    deleteDogs
 
 } = require('./controlers.js');
 
@@ -23,6 +24,8 @@ router.get ('/temperaments', getTemperaments)
 router.get('/dogs/:id', getDogsById)
 
 router.post('/dogs', postDogs)
+
+router.delete('/dogs/:id',deleteDogs);
 
 router.put('/dogs', putDog)
 

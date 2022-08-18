@@ -10,7 +10,7 @@ import {
     FILTER_CREATED,
     GET_NAME_DOGS,
     GET_DETAILS
-   
+
 } from "./ActionsTypes";
 
 const { API_KEY } = process.env;
@@ -82,7 +82,7 @@ export function getNameDogs(name) {
             const json = await axios.get(`http://localhost:3001/dogs?name=${name}`)
             return dispatch({
                 type: GET_NAME_DOGS,
-                payload: json.data 
+                payload: json.data
             })
         } catch (error) {
             return error;

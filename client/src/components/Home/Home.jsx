@@ -31,7 +31,7 @@ function Home() {
     dispatch(getTemperaments());
   }, [dispatch])
 
-  function refresh(e){
+  function refresh(e) {
     window.location.reload()
   }
 
@@ -89,7 +89,7 @@ function Home() {
         <div className={style.select_container}>
           <select onChange={handleOrderByName}>
             <option value={orden}>
-              Alphabetical order
+              Alphabetical Order
             </option>
             <option value="A-Z">A-Z</option>
             <option value="Z-A">Z-A</option>
@@ -98,7 +98,7 @@ function Home() {
         <div className={style.select_container}>
           <select onChange={handleOrderByWeight}>
             <option disabled selected defaultValue>
-              Order by weight
+              Order by Weight
             </option>
             <option value="max_weight">Max</option>
             <option value="min_weight">Min</option>
@@ -150,7 +150,7 @@ function Home() {
           return (
             <div>
               <Link style={{ textDecoration: "none" }} to={'/dogs/' + c.id}>
-                <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[0] + ' a ' + c.weight[1]}/>
+                <Card key={c.id} name={c.name} image={!c.image.url ? c.image : c.image.url} temperament={!c.createdInBd ? c.temperament + ' ' : c.temperamentos.map(el => el.name + (' '))} weight={c.weight[1] ? c.weight[0] + ' a ' + c.weight[1] : c.weight[0]}/>
               </Link>
             </div>
           )
@@ -160,7 +160,7 @@ function Home() {
             <div></div> : <Loading />
         }
       </div>
-      <Footer/>
+      <Footer />
     </div>
   )
 }

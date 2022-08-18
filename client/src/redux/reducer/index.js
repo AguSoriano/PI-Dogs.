@@ -10,7 +10,7 @@ import {
     GET_NAME_DOGS,
     POST_DOGS,
     GET_DETAILS,
-    
+
 } from "../actions/ActionsTypes";
 
 const initialState = {
@@ -34,8 +34,8 @@ export default function reducer(state = initialState, { type, payload }) {
         case ORDER_BY_WEIGHT:
             const sortedWeight =
                 payload === "min_weight"
-                    ? state.dogs.sort((a, b) => parseInt(a.weight.slice(0, 3)) - parseInt(b.weight.slice(0, 3)))
-                    : state.dogs.sort((a, b) => parseInt(b.weight.slice(0, 3)) - parseInt(a.weight.slice(0, 3)))
+                    ? state.dogs.sort((a, b) => parseInt(a.weight.slice(0, 1)) - parseInt(b.weight.slice(0, 1)))
+                    : state.dogs.sort((a, b) => parseInt(b.weight.slice(0, 1)) - parseInt(a.weight.slice(0, 1)))
             return {
                 ...state,
                 dogs: sortedWeight,
@@ -69,8 +69,6 @@ export default function reducer(state = initialState, { type, payload }) {
 
             };
 
-
-
         case GET_TEMPERAMENTS:
 
             const filteresTemp = payload.filter((temp) => temp.name !== "");
@@ -97,7 +95,7 @@ export default function reducer(state = initialState, { type, payload }) {
 
                     if (state.dogs[i].temperament?.find(t => t === payload)) {
                         filteredDogs.push(state.dogs[i]);
-                    }else if(state.dogs[i].temperamentos?.find(t => t === payload)){
+                    } else if (state.dogs[i].temperamentos?.find(t => t === payload)) {
                         filteredDogs.push(state.dogs[i]);
                     }
 
@@ -139,11 +137,11 @@ export default function reducer(state = initialState, { type, payload }) {
 
             if (state.allDogs.length === 0) {
                 state.allDogs = state.dogs;
-            } 
+            }
 
             const allDogs = state.allDogs
             console.log(allDogs)
-            
+
             const createdFilter = payload === 'created' ? allDogs.filter(el => el.createdInBd) : allDogs.filter(el => !el.createdInBd)
             return {
                 ...state,
